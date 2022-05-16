@@ -4,8 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.orderfood.Common.Using;
+import com.example.orderfood.Interface.ItemClickListener;
+import com.example.orderfood.Model.Category;
+import com.example.orderfood.ViewHolder.MenuViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -15,11 +20,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderfood.databinding.ActivityHomeBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity {
 
@@ -60,7 +67,7 @@ public class Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_menu, R.id.nav_cart, R.id.nav_order)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
@@ -71,6 +78,32 @@ public class Home extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         txtName = (TextView) findViewById(R.id.txtName);
         txtName.setText(Using.currentUser.getName());
+
+        //Load menu
+        recycler_menu = (RecyclerView) findViewById(R.id.recycler_menu);
+        recycler_menu.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recycler_menu.setLayoutManager(layoutManager);
+
+        loadMenu();
+    }
+
+    private void loadMenu() {
+        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
+            @Override
+            protected void populateViewHolder(MenuViewHolder menuViewHolder, Category category, int i) {
+                menuViewHolder.txtMenuName.setText(category.getName());
+                Picasso.with(getBaseContext()).load(category.getImage()).into(menuViewHolder.imageView);
+                final Category clickItem = category;
+                menuViewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        Toast.makeText(Home.this, ""+clickItem.getName(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
+        recycler_menu.setAdapter(adapter);
     }
 
     @Override
