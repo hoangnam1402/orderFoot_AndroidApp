@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.orderfood.Common.Using;
 import com.example.orderfood.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,7 +51,10 @@ public class SignIn extends AppCompatActivity {
                             mDialog.dismiss();
                             User user = snapshot.child(editPhone.getText().toString()).getValue(User.class);
                             if (user.getPassword().equals(editPassword.getText().toString())) {
-                                Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
+                                Intent homeIntent = new Intent(SignIn.this, Home.class);
+                                Using.currentUser = user;
+                                startActivity(homeIntent);
+                                finish();
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
                             }

@@ -3,7 +3,9 @@ package com.example.orderfood;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
+import com.example.orderfood.Common.Using;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -13,13 +15,24 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderfood.databinding.ActivityHomeBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Home extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
+
+    FirebaseDatabase database;
+    DatabaseReference category;
+
+    TextView txtName;
+
+    RecyclerView recycler_menu;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +41,13 @@ public class Home extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.appBarHome.toolbar.setTitle("Menu");
         setSupportActionBar(binding.appBarHome.toolbar);
+
+        //Init Firebase
+        database = FirebaseDatabase.getInstance("https://androidorderfood-df945-default-rtdb.asia-southeast1.firebasedatabase.app");
+        category = database.getReference("Category");
+
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +66,11 @@ public class Home extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //Set user name
+        View headerView = navigationView.getHeaderView(0);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txtName.setText(Using.currentUser.getName());
     }
 
     @Override
