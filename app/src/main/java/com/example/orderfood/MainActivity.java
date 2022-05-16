@@ -23,17 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
         txtSlogan = (TextView) findViewById(R.id.txtSlogan);
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent signUp = new Intent(MainActivity.this, SignUp.class);
+                startActivity(signUp);
             }
         });
 
