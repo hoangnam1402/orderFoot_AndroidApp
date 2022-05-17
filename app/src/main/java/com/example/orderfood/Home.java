@@ -76,7 +76,7 @@ public class Home extends AppCompatActivity {
 
         //Set user name
         View headerView = navigationView.getHeaderView(0);
-        txtName = (TextView) findViewById(R.id.txtName);
+        txtName = (TextView) headerView.findViewById(R.id.txtName);
         txtName.setText(Using.currentUser.getName());
 
         //Load menu

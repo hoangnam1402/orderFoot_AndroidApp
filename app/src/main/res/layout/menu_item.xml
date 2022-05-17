@@ -20,8 +20,9 @@
             android:id="@+id/menu_name"
             android:text="Name of menu"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:gravity="center"
+            android:background="@color/gray"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
