@@ -67,9 +67,8 @@ public class FoodList extends AppCompatActivity {
                         Toast.makeText(FoodList.this, ""+local.getName(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                recyclerView.setAdapter(adapter);
             }
         };
+        recyclerView.setAdapter(adapter);
     }
 }
