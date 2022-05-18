@@ -1,6 +1,7 @@
 package com.example.orderfood;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,24 +38,24 @@ public class FoodList extends AppCompatActivity {
 
         //Firebase
         database = FirebaseDatabase.getInstance("https://androidorderfood-df945-default-rtdb.asia-southeast1.firebasedatabase.app");
-        foodList = database.getReference("Foods");
+        foodList = database.getReference("Food");
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
 
         //Get Intent here
-        if(getIntent() != null) {
+        if(getIntent() != null)
             categoryId = getIntent().getStringExtra("CategoryId");
-        }
         if(!categoryId.isEmpty() && categoryId != null){
             loadListFood(categoryId);
         }
     }
 
     private void loadListFood(String categoryId) {
-        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class, R.layout.food_item, FoodViewHolder.class, foodList.orderByChild("MenuId").equalTo(categoryId)) {
+        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class, R.layout.food_item,
+                FoodViewHolder.class, foodList.orderByChild("MenuId").equalTo(categoryId)) {
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
                 foodViewHolder.food_name.setText(food.getName());
