@@ -50,6 +50,7 @@ public class SignIn extends AppCompatActivity {
                         if(snapshot.child(editPhone.getText().toString()).exists()) {
                             mDialog.dismiss();
                             User user = snapshot.child(editPhone.getText().toString()).getValue(User.class);
+                            user.setPhone(editPhone.getText().toString());
                             if (user.getPassword().equals(editPassword.getText().toString())) {
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);
                                 Using.currentUser = user;
