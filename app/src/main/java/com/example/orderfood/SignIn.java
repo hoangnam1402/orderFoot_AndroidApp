@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.orderfood.Common.Using;
+import com.example.orderfood.Databases.Database;
 import com.example.orderfood.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +27,7 @@ public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Database(getBaseContext()).cleanCart();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
