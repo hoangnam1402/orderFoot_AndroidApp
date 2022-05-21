@@ -43,14 +43,15 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCart"
         android:src="@drawable/ic_baseline_shopping_cart_24"
-        android:backgroundTint="@color/white"
+        app:backgroundTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|right|end"
-        app:useCompatPadding="true"/>
+        app:useCompatPadding="true"
+        android:contentDescription="Add to Cart" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestScrollView"
