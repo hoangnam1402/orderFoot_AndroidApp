@@ -27,6 +27,8 @@ public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Database(getBaseContext()).cleanCart();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
