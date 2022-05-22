@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderStatus extends AppCompatActivity {
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    public RecyclerView recyclerView;
+    public RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
     DatabaseReference requests;
@@ -51,7 +51,7 @@ public class OrderStatus extends AppCompatActivity {
                 Request.class,
                 R.layout.order_layout,
                 OrderViewHolder.class,
-                requests.child("phone").equalTo(phone)
+                requests
         ) {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
