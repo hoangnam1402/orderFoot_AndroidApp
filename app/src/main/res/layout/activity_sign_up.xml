@@ -33,11 +33,11 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/editName"
-            android:hint="test2"
+            android:hint="User Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="test3"
+            android:text="test"
             android:textColor="@android:color/white"
             android:textSize="34sp"
             android:inputType="phone"
@@ -49,7 +49,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/editPassword"
-            android:hint="Passworf"
+            android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"

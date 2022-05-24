@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.orderfood.Common.Using;
 import com.example.orderfood.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,6 +56,9 @@ public class SignUp extends AppCompatActivity {
                             User user = new User(editName.getText().toString(), editPassword.getText().toString());
                             table_user.child(editPhone.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Sign Up successfully !", Toast.LENGTH_SHORT).show();
+                            Intent homeIntent = new Intent(SignUp.this, Home.class);
+                            Using.currentUser = user;
+                            startActivity(homeIntent);
                             finish();
                         }
                     }
